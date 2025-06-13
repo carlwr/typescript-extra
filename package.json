@@ -59,18 +59,19 @@
     "LAST_dummy": "false"
   },
   "packageManager": "pnpm@10.11.0",
-  "dependencies": {},
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@fast-check/vitest": "^0.2.1",
     "@types/node": "^22.15.21",
     "arg": "^5.0.2",
+    "read-pkg": "^9.0.1",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typedoc": "^0.28.5",
     "typedoc-plugin-markdown": "^4.6.4",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4",
+    "zod": "^3.25.56",
     "zzz_LAST_dummy": "npm:empty-npm-package@1.0.0"
   },
   "engines": {
