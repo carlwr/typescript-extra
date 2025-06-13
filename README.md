@@ -87,7 +87,7 @@ Map over non-empty array with a function that returns a non-empty array, and ret
 ```ts
 function getMatch(re: RegExp, str: string): string
 ```
-if the regex matches the string exactly once, return the match; otherwise throw
+return the match of the regex, or throw if no match
 
 ### `hasAtleastTwo`
 

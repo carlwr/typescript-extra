@@ -184,11 +184,11 @@ export async function rm_rf(path: string): Promise<void> {
 }
 
 /**
- * if the regex matches the string exactly once, return the match; otherwise throw
+ * return the match of the regex, or throw if no match
  */
 export function getMatch(re: RegExp, str: string): string {
   const matches = str.match(re) || []
-  if (matches===undefined || !isSingle(matches))
+  if (matches===null || !isNonEmpty(matches))
     throw new Error(`regex /${re.source}/ did not match '${str}' exactly once`)
   return matches[0]
 }
