@@ -1,12 +1,21 @@
 # typescript-extra
 
-Personal helpers and convenience functions for TypeScript.
+Personal helpers and convenience functions for TypeScript
+
+Links:
+* github: [github.com/carlwr/typescript-extra](https://github.com/carlwr/typescript-extra)
+* npm: [www.npmjs.com/package/typescript-extra](https://www.npmjs.com/package/typescript-extra)
 
 ## Installation
 
 ```bash
 npm install @carlwr/typescript-extra
+
+# run checks and tests:
+npm qa
 ```
+
+---
 
 ## API
 
