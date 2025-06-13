@@ -1,0 +1,1 @@
+../../fastcheck-utils/scripts/makeReadme.ts
