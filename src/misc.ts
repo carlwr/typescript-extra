@@ -203,3 +203,34 @@ export function getMatch(re: RegExp, str: string): string {
 export function trim(str: string): string {
   return str.trim()
 }
+
+/**
+ * Evaluate to type `true` if each type extends the other.
+ */
+export type Eq<T,Expected> =
+  T extends Expected
+    ? Expected extends T
+      ? true
+      : false
+    : false
+
+/**
+ * A generic that only type-checks if its parameter is `true`.
+ *
+ * Intended to be used with {@link Eq} as a compile-time assertion that two types are equal.
+ *
+ * @example
+ *
+ * type T = Assert<Eq<number, number>>
+ * type U = Assert<Eq<number, string>> // type error
+ *
+ * // test a generic that is type function-like:
+ * type WithoutNumber<T> = Exclude<T, number>
+ * type _Test = Assert<Eq<WithoutNumber<number|string>, string>>
+ *
+ */
+export type Assert<_T extends true> = null
+
+// test for Eq and Assert - should type-check:
+type _WithoutNumber<T> = Exclude<T, number>
+type _TestEqAssert = Assert<Eq<_WithoutNumber<number|string>, string>>
