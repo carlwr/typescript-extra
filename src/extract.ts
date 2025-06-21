@@ -1,5 +1,3 @@
-import { isRecord } from "./misc.js"
-
 /**
  * walk {@link root} recursively while collecting all {@link T}s for which {@link pred} returnes a defined result
  *
@@ -32,25 +30,12 @@ export function extract<T>(
   function go(node: unknown): T[] {
 
     const ret =
-        Array.isArray    (node) ? flatMapArr_(node, go)
-      : isRecord(node) ? flatMapRec_(node, handleEntry)
-      : [] // null, primitives, functions, other records
+        Array.isArray(node)      ? node.flatMap(go)
+      : node===null              ? []
+      : typeof node === 'object' ? Object.entries(node).flatMap(handleEntry)
+      : []
     return ret
   }
 
   return go(root)
-}
-
-function flatMapArr_<U,T>(
-  xs: U[],
-  fn: (x:U) => T[]
-): T[] {
-  return xs.flatMap(fn)
-}
-
-function flatMapRec_<T>(
-  rec: Record<string,unknown>,
-  fn : (t:[string,unknown]) => T[]
-): T[] {
-  return Object.entries(rec).flatMap(fn)
 }
