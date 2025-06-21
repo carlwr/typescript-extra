@@ -39,18 +39,18 @@ export function allUnique<T extends Primitive>(xs: T[]): boolean {
 
 
 /**
- * Map over non-empty array while preserving the type as non-empty
+ * Map over a non-empty array while preserving the type as non-empty
  */
 export function mapNonEmpty<T,U>(
   xs: readonly [T,...T[]],
   fn: (x: T) => U
 ): [U,...U[]] {
   const mapped = xs.map(fn)
-  return mapped as [U,...U[]]
+  return mapped as [U,...U[]] // if the world were perfect, it wouldn't be
 }
 
 /**
- * Map over non-empty array with a function that returns a non-empty array, and return a flattened non-empty array
+ * Flatmap over a non-empty array with a function returning a non-empty arrays. Return the flattened result as a non-empty array.
  */
 export function flatmapNonEmpty<T,U>(
   xs: readonly [T,...T[]],
@@ -75,6 +75,8 @@ export function flatmapNonEmpty<T,U>(
  * next(); // => 3
  * next(); // => 3 (returns 3 forever)
  */
+// a.k.a. imperative sometimes has its merits
+// edit: no it hasn't. But it occasionally has _its uses_.
 export function drain<T>(xs: [T,...T[]]): () => T {
   let state: [T,...T[]] = xs
   return () => {

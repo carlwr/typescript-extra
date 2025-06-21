@@ -89,7 +89,7 @@ const result = extract<number>(root, pred)
 ```ts
 function flatmapNonEmpty<T, U>(xs: readonly [T, T], fn: (x: T) => [U, ...U[]]): [U, ...U[]]
 ```
-Map over non-empty array with a function that returns a non-empty array, and return a flattened non-empty array
+Flatmap over a non-empty array with a function returning a non-empty arrays. Return the flattened result as a non-empty array.
 
 ### `getMatch`
 
@@ -161,7 +161,7 @@ function mapFilterAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<undefined |
 ```ts
 function mapNonEmpty<T, U>(xs: readonly [T, T], fn: (x: T) => U): [U, ...U[]]
 ```
-Map over non-empty array while preserving the type as non-empty
+Map over a non-empty array while preserving the type as non-empty
 
 ### `memoized`
 
