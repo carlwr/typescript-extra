@@ -87,7 +87,7 @@ function docstringExample() {
     A: 1,
     b: 0,
     c: {
-      99: [{A:2}, {e:"zero"}],
+      99: [{A:2}, {e:"zero"}, null],
       A: 3
     }
   }
