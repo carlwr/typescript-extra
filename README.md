@@ -126,13 +126,6 @@ function isNonEmpty<T>(xs: readonly T[]): xs is [T, ...T[]]
 ```
 
 
-### `isRecord`
-
-```ts
-function isRecord<K>(value: unknown): value is Record<string, K>
-```
-whether the argument is a Record
-
 ### `isSingle`
 
 ```ts

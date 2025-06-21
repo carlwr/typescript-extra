@@ -163,20 +163,6 @@ export function assertNever(_: never): never {
 }
 
 /**
- * whether the argument is a {@link Record}
- */
-export function isRecord<K extends keyof any>(value: unknown): value is Record<string,K> {
-  if (
-       typeof value !== 'object'
-    || value === null
-    || Array.isArray(value)
-  )
-    return false
-
-  return (Object.getOwnPropertySymbols(value).length === 0)
-}
-
-/**
  * remove a file or directory recursively; ignore errors
  */
 export async function rm_rf(path: string): Promise<void> {
