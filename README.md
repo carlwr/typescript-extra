@@ -4,7 +4,7 @@ Personal helpers and convenience functions for TypeScript
 
 Links:
 * github: [github.com/carlwr/typescript-extra](https://github.com/carlwr/typescript-extra)
-* npm: [www.npmjs.com/package/typescript-extra](https://www.npmjs.com/package/typescript-extra)
+* npm: [www.npmjs.com/package/@carlwr/typescript-extra](https://www.npmjs.com/package/@carlwr/typescript-extra)
 
 ## Installation
 
