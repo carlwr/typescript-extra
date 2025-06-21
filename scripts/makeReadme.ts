@@ -13,7 +13,6 @@ import preamble from './readmePreamble.js';
 */
 
 const TO        = 'README.md'
-const PREAMBLE  = './scripts/readme_preamble.md'
 const SRC_INDEX = 'src/index.ts'
 const TEMPDIR   = '.aux/makeReadme'
 
