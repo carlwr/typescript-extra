@@ -75,8 +75,8 @@ export function flatmapNonEmpty<T,U>(
  * next(); // => 3
  * next(); // => 3 (returns 3 forever)
  */
-export function drain<T>(xs: NonEmpty<T>): () => T {
-  let state: NonEmpty<T> = xs
+export function drain<T>(xs: [T,...T[]]): () => T {
+  let state: [T,...T[]] = xs
   return () => {
     if (hasAtleastTwo(state)) {
       const [x0,...xs_rest] = state

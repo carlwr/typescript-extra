@@ -41,7 +41,7 @@ function assertNever(_: never): never
 ### `drain`
 
 ```ts
-function drain<T>(xs: NonEmpty<T>): () => T
+function drain<T>(xs: [T, ...T[]]): () => T
 ```
 Stateful iterator yielding the elements of `xs`.
 
