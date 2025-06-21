@@ -163,6 +163,22 @@ export function assertNever(_: never): never {
 }
 
 /**
+ * whether the value is an object that has the key
+ *
+ * in the `true` branch, the type of the passed argument is narrowed to include the knowledge that the key is present, without destroying any other knowledge about the type prior to the call
+ */
+export function hasKey<T,K extends keyof any>(
+  value: T,
+  key: K
+): value is T & { [P in K]: unknown } {
+  return (
+       typeof value === 'object'
+    && value !== null
+    && key in value
+  )
+}
+
+/**
  * remove a file or directory recursively; ignore errors
  */
 export async function rm_rf(path: string): Promise<void> {

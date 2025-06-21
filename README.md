@@ -105,6 +105,15 @@ function hasAtleastTwo<T>(xs: readonly T[]): xs is [T, T, ...T[]]
 ```
 
 
+### `hasKey`
+
+```ts
+function hasKey<T, K>(value: T, key: K): value is T & { [P in string | number | symbol]: unknown }
+```
+whether the value is an object that has the key
+
+in the `true` branch, the type of the passed argument is narrowed to include the knowledge that the key is present, without destroying any other knowledge about the type prior to the call
+
 ### `isDefined`
 
 ```ts
