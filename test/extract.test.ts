@@ -1,5 +1,5 @@
 import { fc, test } from '@fast-check/vitest';
-import { describe, expect, should } from 'vitest';
+import { describe, expect } from 'vitest';
 import { extract } from '../src/extract.js';
 
 
