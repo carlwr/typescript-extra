@@ -50,12 +50,12 @@ When the last element is reached, calls will continue to return that element ind
 example:
 
 ```ts
-const next = drain([1, 2, 3]);
-next(); // => 1
-next(); // => 2
-next(); // => 3
-next(); // => 3
-next(); // => 3 (returns 3 forever)
+const next = drain([1, 2, 3])
+next()  // => 1
+next()  // => 2
+next()  // => 3
+next()  // => 3
+next()  // => 3 (returns 3 forever)
 ```
 
 ### `extract`

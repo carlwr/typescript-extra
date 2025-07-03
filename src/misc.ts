@@ -1,4 +1,4 @@
-import { rm } from "node:fs/promises";
+import { rm } from 'node:fs/promises'
 
 /**
  * A non-empty array
@@ -21,7 +21,7 @@ export type Primitive =
  * A rejected promise is cached as well, i.e. no re-attempts (failures are assumed to be permanent).
  */
 export function memoized<T>(f: () => Promise<T>): () => Promise<T> {
-  let p: Promise<T> | null = null;
+  let p: Promise<T> | null = null
   return () => p ?? (p = f())
 }
 
@@ -68,12 +68,12 @@ export function flatmapNonEmpty<T,U>(
  * When the last element is reached, calls will continue to return that element indefinitely.
  *
  * @example
- * const next = drain([1, 2, 3]);
- * next(); // => 1
- * next(); // => 2
- * next(); // => 3
- * next(); // => 3
- * next(); // => 3 (returns 3 forever)
+ * const next = drain([1, 2, 3])
+ * next()  // => 1
+ * next()  // => 2
+ * next()  // => 3
+ * next()  // => 3
+ * next()  // => 3 (returns 3 forever)
  */
 // a.k.a. imperative sometimes has its merits
 // edit: no it hasn't. But it occasionally has _its uses_.
@@ -103,29 +103,29 @@ export function mapFilterAsync<T, U>(
   xs: readonly T[],
   f: (x: T) => Promise<U|null|undefined>
 ): Promise<U[]> {
-  return Promise.all(xs.map(f)).then(results => results.filter(isDefined));
+  return Promise.all(xs.map(f)).then(results => results.filter(isDefined))
 }
 
 export function mapAsync<T, U>(
   xs: readonly T[],
   f: (x: T) => Promise<U>
 ): Promise<U[]> {
-  return Promise.all(xs.map(f));
+  return Promise.all(xs.map(f))
 }
 
 export async function partitionAsync<A, B extends boolean>(
   items: readonly A[],
   pred: (a: A) => Promise<B>
 ): Promise<readonly [A[], A[]]> {
-  const results = await Promise.all(items.map(pred));
+  const results = await Promise.all(items.map(pred))
 
-  const yes: A[] = [];
-  const no : A[] = [];
+  const yes: A[] = []
+  const no : A[] = []
 
   for (let i = 0; i < items.length; i++) {
-    (results[i] ? yes : no).push(items[i] as A);
+    (results[i] ? yes : no).push(items[i] as A)
   }
-  return [yes, no] as const;
+  return [yes, no] as const
 }
 
 /**
@@ -141,7 +141,7 @@ export function withoutFirstSubstring(first: string, str: string) {
 }
 
 export function isDefined<T>(x: T|null|undefined): x is NonNullable<T> {
-  return x != null;
+  return x != null
 }
 
 export function isEmpty<T>(xs: readonly T[]): xs is [] {
@@ -149,19 +149,19 @@ export function isEmpty<T>(xs: readonly T[]): xs is [] {
 }
 
 export function isNonEmpty<T>(xs: readonly T[]): xs is [T, ...T[]] {
-  return xs.length >= 1;
+  return xs.length >= 1
 }
 
 export function isSingle<T>(xs: readonly T[]): xs is [T] {
-  return xs.length === 1;
+  return xs.length === 1
 }
 
 export function hasAtleastTwo<T>(xs: readonly T[]): xs is [T, T, ...T[]] {
-  return xs.length >= 2;
+  return xs.length >= 2
 }
 
 export function assertNever(_: never): never {
-  throw new Error("unhandled variant");
+  throw new Error("unhandled variant")
 }
 
 /**

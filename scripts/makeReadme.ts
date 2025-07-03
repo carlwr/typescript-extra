@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, rm_rf, trim } from '../src/misc.js';
-import { Application, type TypeDocOptions } from 'typedoc';
-import type { PluginOptions } from 'typedoc-plugin-markdown';
-import preamble from './readmePreamble.js';
+import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, rm_rf, trim } from '../src/misc.js'
+import { Application, type TypeDocOptions } from 'typedoc'
+import type { PluginOptions } from 'typedoc-plugin-markdown'
+import preamble from './readmePreamble.js'
 
 /* hacky, temporary implementation for creating the API section of the readme:
 - use TypeDoc with the markdown plugin to generate markdown files
@@ -16,7 +16,7 @@ const TO        = 'README.md'
 const SRC_INDEX = 'src/index.ts'
 const TEMPDIR   = '.aux/makeReadme'
 
-type ExtendedTypeDocOptions = TypeDocOptions & PluginOptions;
+type ExtendedTypeDocOptions = TypeDocOptions & PluginOptions
 
 const pluginOptions: ExtendedTypeDocOptions = {
   plugin: ['typedoc-plugin-markdown'],
@@ -40,7 +40,7 @@ const pluginOptions: ExtendedTypeDocOptions = {
     notExported: false,
     rewrittenLink: false,
   },
-};
+}
 
 // convention: all multi-line strings are _trimmed_ - no trailing newlines
 
@@ -127,7 +127,7 @@ function renderSections(secs: [Section, ...Section[]]): string {
 
 async function readDoc(path: string): Promise<Doc> {
   if (!path.endsWith('.md')) {
-    throw new Error(`Invalid file name: ${path}`);
+    throw new Error(`Invalid file name: ${path}`)
   }
   const contents = await readFile(path, 'utf-8')
   return { path, contents }
@@ -138,7 +138,7 @@ async function readDocs(dir: string): Promise<Doc[]> {
   try {
     filenames = await readdir(dir)
   } catch {
-    throw new Error(`Failed to read directory: ${dir}`);
+    throw new Error(`Failed to read directory: ${dir}`)
   }
   const paths = filenames.sort().map(f => join(dir, f))
   return await Promise.all(paths.map(readDoc))
@@ -146,15 +146,15 @@ async function readDocs(dir: string): Promise<Doc[]> {
 
 async function mkReadme(): Promise<void> {
 
-  const app = await Application.bootstrapWithPlugins(pluginOptions);
+  const app = await Application.bootstrapWithPlugins(pluginOptions)
 
-  const project = await app.convert();
-  if (!project) throw new Error('Failed to convert project');
+  const project = await app.convert()
+  if (!project) throw new Error('Failed to convert project')
 
-  await app.generateOutputs(project);
+  await app.generateOutputs(project)
   await rm_rf(join(TEMPDIR, 'README.md' ))
   await rm_rf(join(TEMPDIR, 'interfaces'))
-  console.log(`files generated into ${TEMPDIR}.`);
+  console.log(`files generated into ${TEMPDIR}.`)
 
   const allDocs  = await readDocs(join(TEMPDIR, 'functions'))
   const docs     = allDocs.filter(doc => !doc.path.endsWith('_.md'))
@@ -176,8 +176,8 @@ async function mkReadme(): Promise<void> {
   // print what the current dir is:
   console.log(`current dir: ${process.cwd()}`)
 
-  await writeFile(TO, readme, 'utf-8');
-  console.log(`${TO} generated successfully.`);
+  await writeFile(TO, readme, 'utf-8')
+  console.log(`${TO} generated successfully.`)
 }
 
-mkReadme().catch(console.error);
+mkReadme().catch(console.error)

@@ -1,4 +1,4 @@
-import * as pkg from "./pkgJson.js";
+import * as pkg from './pkgJson.js'
 
 const preamble =
 `# ${pkg.name}

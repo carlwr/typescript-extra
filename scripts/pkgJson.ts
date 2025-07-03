@@ -19,8 +19,8 @@ function parse(): PackageJson {
   }
 }
 
-export type PackageJson = z.infer<typeof schema>;
-export const pkgJson = parse();
+export type PackageJson = z.infer<typeof schema>
+export const pkgJson = parse()
 
 export const name = pkgJson.name.replace(/^@.*?\//, '')
 
