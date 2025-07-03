@@ -9,8 +9,8 @@ function pred_GtEq10(_k: unknown, v: unknown): number|undefined {
   return undefined
 }
 
-const pred_none = ()                   => undefined
-const pred_all  = (_k: string, v: any) => v
+const pred_none = ()                       => undefined
+const pred_all  = (_k: string, v: unknown) => v
 
 
 test('docstring example', () => {
@@ -35,7 +35,7 @@ describe('properties', () => {
   test.prop([fc.object()])('pick numeric values', (obj) => {
     const keys: Set<number> = new Set()
 
-    const pred = (_k: any, v: unknown): number|undefined => {
+    const pred = (_k: unknown, v: unknown): number|undefined => {
       if (typeof v === 'number') { keys.add(v); return v; }
       return undefined
     }
@@ -92,7 +92,7 @@ function docstringExample() {
     }
   }
 
-  function pred(k: string, v: any): number|undefined {
+  function pred(k: string, v: unknown): number|undefined {
     if (k === 'A' && typeof v === 'number')
       return v
     return undefined

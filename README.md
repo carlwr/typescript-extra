@@ -61,7 +61,7 @@ next()  // => 3 (returns 3 forever)
 ### `extract`
 
 ```ts
-function extract<T>(root: unknown, pred: (k: string, v: any) => undefined | T): T[]
+function extract<T>(root: unknown, pred: (k: string, v: unknown) => undefined | T): T[]
 ```
 walk `root` recursively while collecting all `T`s for which `pred` returnes a defined result
 

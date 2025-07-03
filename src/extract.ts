@@ -19,7 +19,7 @@
  */
 export function extract<T>(
   root: unknown,
-  pred: (k: string, v: any) => T|undefined
+  pred: (k: string, v: unknown) => T|undefined
 ): T[] {
 
   function handleEntry([k,v]: [string,unknown]): T[] {

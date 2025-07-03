@@ -183,7 +183,7 @@ export function hasKey<T,K extends PropertyKey>(
 /**
  * remove a file or directory recursively; ignore errors
  */
-export async function rm_rf(path: string): Promise<void> {
+export function rm_rf(path: string): Promise<void> {
   return rm(path, {recursive: true}).catch(() => {})
 }
 

@@ -15,7 +15,7 @@
  */
 export function regexx(
   strings  : TemplateStringsArray,
-  ...values: any[]
+  ...values: unknown[]
 ): {
   with     : (flags?: string) => RegExp
   source   : string
