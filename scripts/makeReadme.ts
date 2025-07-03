@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { readFile, readdir, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, rm_rf, trim } from '../src/misc.js'
 import { Application, type TypeDocOptions } from 'typedoc'
 import type { PluginOptions } from 'typedoc-plugin-markdown'
+import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, rm_rf, trim } from '../src/misc.js'
 import preamble from './readmePreamble.js'
 
 /* hacky, temporary implementation for creating the API section of the readme:
