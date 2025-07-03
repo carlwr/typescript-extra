@@ -154,7 +154,6 @@ async function mkReadme(): Promise<void> {
   await app.generateOutputs(project)
   await rm_rf(join(TEMPDIR, 'README.md' ))
   await rm_rf(join(TEMPDIR, 'interfaces'))
-  console.log(`files generated into ${TEMPDIR}.`)
 
   const allDocs  = await readDocs(join(TEMPDIR, 'functions'))
   const docs     = allDocs.filter(doc => !doc.path.endsWith('_.md'))
@@ -173,11 +172,8 @@ async function mkReadme(): Promise<void> {
 
   const readme = `${preamble}\n\n${renderedDocs}`
 
-  // print what the current dir is:
-  console.log(`current dir: ${process.cwd()}`)
-
   await writeFile(TO, readme, 'utf-8')
-  console.log(`${TO} generated successfully.`)
+  console.info(`created ${TO} from ${docs.length} markdown files in ${TEMPDIR}\n`)
 }
 
 mkReadme().catch(console.error)
