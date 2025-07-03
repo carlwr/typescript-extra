@@ -52,9 +52,10 @@
     "lint": "biome check",
     "imports:sort": "biome check --linter-enabled=false --organize-imports-enabled=true --write",
     "typecheck": "tsc --noEmit",
+    "style": "scripts/checkStyle",
     "test": "vitest run",
     "test:watch": "vitest",
-    "qa": "pnpm typecheck && pnpm lint && pnpm test",
+    "qa": "pnpm typecheck && pnpm lint && pnpm test && pnpm run style",
     "readme": "tsx scripts/makeReadme.ts",
     "LAST_dummy": "false"
   },
