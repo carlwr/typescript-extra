@@ -32,7 +32,7 @@ export function memoized<T>(f: () => Promise<T>): () => Promise<T> {
  * O(n)
  * (if the hash tables behave, and they should for primitives)
  * (constants likely not too great)
-*/
+ */
 export function allUnique<T extends Primitive>(xs: T[]): boolean {
   return new Set(xs).size === xs.length
 }
@@ -169,7 +169,7 @@ export function assertNever(_: never): never {
  *
  * in the `true` branch, the type of the passed argument is narrowed to include the knowledge that the key is present, without destroying any other knowledge about the type prior to the call
  */
-export function hasKey<T,K extends keyof any>(
+export function hasKey<T,K extends PropertyKey>(
   value: T,
   key: K
 ): value is T & { [P in K]: unknown } {

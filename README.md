@@ -108,7 +108,7 @@ function hasAtleastTwo<T>(xs: readonly T[]): xs is [T, T, ...T[]]
 ### `hasKey`
 
 ```ts
-function hasKey<T, K>(value: T, key: K): value is T & { [P in string | number | symbol]: unknown }
+function hasKey<T, K>(value: T, key: K): value is T & { [P in PropertyKey]: unknown }
 ```
 whether the value is an object that has the key
 
