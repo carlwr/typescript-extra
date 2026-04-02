@@ -61,7 +61,7 @@ next()  // => 3 (returns 3 forever)
 ### `extract`
 
 ```ts
-function extract<T>(root: unknown, pred: (k: string, v: unknown) => undefined | T): T[]
+function extract<T>(root: unknown, pred: (k: string, v: unknown) => T | undefined): T[]
 ```
 walk `root` recursively while collecting all `T`s for which `pred` returnes a defined result
 
@@ -117,7 +117,7 @@ in the `true` branch, the type of the passed argument is narrowed to include the
 ### `isDefined`
 
 ```ts
-function isDefined<T>(x: undefined | null | T): x is NonNullable<T>
+function isDefined<T>(x: T | null | undefined): x is NonNullable<T>
 ```
 
 
@@ -152,7 +152,7 @@ function mapAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<U>): Promise<U[]>
 ### `mapFilterAsync`
 
 ```ts
-function mapFilterAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<undefined | null | U>): Promise<U[]>
+function mapFilterAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<U | null | undefined>): Promise<U[]>
 ```
 
 
