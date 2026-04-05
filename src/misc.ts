@@ -18,11 +18,35 @@ export type Primitive =
 /**
  * Cached, lazy, single-flight evaluation of a promise.
  *
- * A rejected promise is cached as well, i.e. no re-attempts (failures are assumed to be permanent).
+ * A rejected promise is cached as well, i.e. no re-attempts (rejections are assumed to be permanent).
  */
 export function memoized<T>(f: () => Promise<T>): () => Promise<T> {
   let p: Promise<T> | null = null
   return () => p ?? (p = f())
+}
+
+
+/**
+ * Cached, lazy evaluation.
+ *
+ * If {@link f} throws, the result is not cached: the next call will evaluate {@link f} again.
+ *
+ * This function can be thought of as the synchronous analogue to the promise-oriented {@link memoized}. Note though that the error-handling differs.
+ *
+ * @example
+ * const getCfg = cached(() => readFileSync('config.json', 'utf8'))
+ * let c0 = getCfg()  // reads the file, returns result
+ * let c1 = getCfg()  // returns cached result
+ */
+export function cached<T>(f: () => T): () => T {
+  let s:  // state
+    | { done: false }
+    | { done: true, v: T }
+    = { done: false }
+  return () =>
+    s.done
+      ? s.v
+      : ( s = { done: true, v: f() }).v
 }
 
 

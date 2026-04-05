@@ -34,3 +34,29 @@ describe('memoized', () => {
   })
 
 })
+
+
+describe('cached', () => {
+
+  test.prop([fc.anything()])('caches any value; f called once', (x) => {
+    let n = 0
+    const get = cached(() => { n++; return x })
+    expect(get()).toBe(x)
+    expect(get()).toBe(x)
+    expect(n).toBe(1)
+  })
+
+  test('throw not cached — retries until success', () => {
+    let n = 0
+    const get = cached(() => {
+      if (n++ < 2) throw new Error('fail')
+      return 'ok'
+    })
+    expect(() => get()).toThrow('fail')
+    expect(() => get()).toThrow('fail')
+    expect(get()).toBe('ok')
+    expect(get()).toBe('ok')
+    expect(n).toBe(3)
+  })
+
+})
