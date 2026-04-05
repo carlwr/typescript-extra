@@ -38,6 +38,25 @@ function assertNever(_: never): never
 ```
 
 
+### `cached`
+
+```ts
+function cached<T>(f: () => T): () => T
+```
+Cached, lazy evaluation.
+
+If `f` throws, the result is not cached: the next call will evaluate `f` again.
+
+This function can be thought of as the synchronous analogue to the promise-oriented `memoized`. Note though that the error-handling differs.
+
+example:
+
+```ts
+const getCfg = cached(() => readFileSync('config.json', 'utf8'))
+let c0 = getCfg()  // reads the file, returns result
+let c1 = getCfg()  // returns cached result
+```
+
 ### `drain`
 
 ```ts
@@ -170,7 +189,7 @@ function memoized<T>(f: () => Promise<T>): () => Promise<T>
 ```
 Cached, lazy, single-flight evaluation of a promise.
 
-A rejected promise is cached as well, i.e. no re-attempts (failures are assumed to be permanent).
+A rejected promise is cached as well, i.e. no re-attempts (rejections are assumed to be permanent).
 
 ### `partitionAsync`
 
