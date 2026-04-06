@@ -170,7 +170,7 @@ async function mkReadme(): Promise<void> {
     return `### \`${funcName}\`\n\n${rendered}`
   }).join('\n\n')
 
-  const readme = `${preamble}\n\n${renderedDocs}`
+  const readme = `${preamble}\n\n${renderedDocs}\n`
 
   await writeFile(TO, readme, 'utf-8')
   console.info(`created ${TO} from ${docs.length} markdown files in ${TEMPDIR}\n`)
