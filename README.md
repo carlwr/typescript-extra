@@ -3,13 +3,16 @@
 Personal helpers and convenience functions for TypeScript
 
 Links:
-* github: [github.com/carlwr/typescript-extra](https://github.com/carlwr/typescript-extra)
-* npm: [www.npmjs.com/package/@carlwr/typescript-extra](https://www.npmjs.com/package/@carlwr/typescript-extra)
+* Github: [`carlwr/typescript-extra`](https://github.com/carlwr/typescript-extra)
+* npm: [`@carlwr/typescript-extra`](https://www.npmjs.com/package/@carlwr/typescript-extra)
+* JSR: [`@carlwr/typescript-extra`](https://jsr.io/@carlwr/typescript-extra)
 
 ## Installation
 
 ```bash
+# one of:
 npm install @carlwr/typescript-extra
+pnpm dlx jsr add @carlwr/typescript-extra
 
 # run checks and tests:
 npm qa

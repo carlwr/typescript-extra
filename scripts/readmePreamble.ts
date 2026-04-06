@@ -6,13 +6,16 @@ const preamble =
 ${pkg.pkgJson.description}
 
 Links:
-* github: ${linkify(pkg.repoUrl)}
-* npm: ${linkify(pkg.npmUrl)}
+* Github: [\`carlwr/typescript-extra\`](https://github.com/carlwr/typescript-extra)
+* npm: [\`@carlwr/typescript-extra\`](https://www.npmjs.com/package/@carlwr/typescript-extra)
+* JSR: [\`@carlwr/typescript-extra\`](https://jsr.io/@carlwr/typescript-extra)
 
 ## Installation
 
 \`\`\`bash
+# one of:
 npm install ${pkg.pkgJson.name}
+pnpm dlx jsr add ${pkg.pkgJson.name}
 
 # run checks and tests:
 npm qa
@@ -24,9 +27,3 @@ npm qa
 `
 
 export default preamble
-
-// to md link; link text: remove https?://
-function linkify(url: string): string {
-  const linkText = url.replace(/^https?:\/\//, '')
-  return `[${linkText}](${url})`
-}
