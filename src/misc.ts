@@ -123,6 +123,9 @@ export function safeIndex<T>(xs: readonly [T, ...T[]], i: number): T {
   return xs[i] as T
 }
 
+/**
+ * Map an async function over {@link xs} and keep only defined results.
+ */
 export function mapFilterAsync<T, U>(
   xs: readonly T[],
   f: (x: T) => Promise<U|null|undefined>
@@ -130,6 +133,9 @@ export function mapFilterAsync<T, U>(
   return Promise.all(xs.map(f)).then(results => results.filter(isDefined))
 }
 
+/**
+ * Map an async function over {@link xs}.
+ */
 export function mapAsync<T, U>(
   xs: readonly T[],
   f: (x: T) => Promise<U>
@@ -137,6 +143,9 @@ export function mapAsync<T, U>(
   return Promise.all(xs.map(f))
 }
 
+/**
+ * Split items into those for which the async predicate resolves truthy and falsy.
+ */
 export async function partitionAsync<A, B extends boolean>(
   items: readonly A[],
   pred: (a: A) => Promise<B>
@@ -184,6 +193,9 @@ export function hasAtleastTwo<T>(xs: readonly T[]): xs is [T, T, ...T[]] {
   return xs.length >= 2
 }
 
+/**
+ * Marker for exhaustiveness checks in discriminated unions.
+ */
 export function assertNever(_: never): never {
   throw new Error("unhandled variant")
 }
