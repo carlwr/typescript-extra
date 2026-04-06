@@ -4,6 +4,8 @@ import { z } from 'zod'
 
 const schema = z.object({
   name: z.string(),
+  version: z.string(),
+  license: z.string(),
   description: z.string(),
   repository: z.object({
     url: z.string(),
