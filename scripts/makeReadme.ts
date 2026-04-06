@@ -4,8 +4,9 @@ import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { Application, type TypeDocOptions } from 'typedoc'
 import type { PluginOptions } from 'typedoc-plugin-markdown'
-import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, rm_rf, trim } from '../src/misc.js'
+import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, trim } from '../src/misc.js'
 import preamble from './readmePreamble.js'
+import { rm } from 'node:fs/promises'
 
 /* hacky, temporary implementation for creating the API section of the readme:
 - use TypeDoc with the markdown plugin to generate markdown files
@@ -57,6 +58,10 @@ interface Section {
   heading : Heading
   block   : undefined|string
   contents: string
+}
+
+async function rm_rf(path: string): Promise<void> {
+  return await rm(path, {recursive: true}).catch(() => {})
 }
 
 function toHashes(hashes: string): Hashes {

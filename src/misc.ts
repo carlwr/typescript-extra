@@ -1,5 +1,3 @@
-import { rm } from 'node:fs/promises'
-
 /**
  * A non-empty array
  */
@@ -214,13 +212,6 @@ export function hasKey<T,K extends PropertyKey>(
     && value !== null
     && key in value
   )
-}
-
-/**
- * remove a file or directory recursively; ignore errors
- */
-export function rm_rf(path: string): Promise<void> {
-  return rm(path, {recursive: true}).catch(() => {})
 }
 
 /**
