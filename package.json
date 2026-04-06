@@ -53,6 +53,7 @@
     "lint:jsr": "deno lint mod.ts src test build.ts scripts",
     "doc:jsr": "deno doc mod.ts",
     "qa:jsr": "pnpm run lint:jsr && pnpm run publish:jsr:dry",
+    "qa:bun": "bun -e \"import('./mod.ts').then((m) => console.log('ok', typeof m.rm_rf, typeof m.cached)).catch((e) => { console.error(e); process.exit(1) })\" && bun run test",
     "publish:jsr:dry": "pnpm run jsr:sync && deno publish --dry-run --allow-dirty",
     "publish:jsr": "pnpm run jsr:sync && deno publish",
     "publish:dry": "pnpm publish --dry-run --no-git-checks",
