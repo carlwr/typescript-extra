@@ -7,7 +7,7 @@ describe('memoized', () => {
 
   test.prop([fc.anything()])('caches any resolved value; f called once', async (x) => {
     let n = 0
-    const get = memoized(async () => { n++; return x })
+    const get = memoized(() => { n++; return Promise.resolve(x) })
     await expect(get()).resolves.toBe(x)
     await expect(get()).resolves.toBe(x)
     expect(n).toBe(1)

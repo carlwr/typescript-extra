@@ -158,7 +158,7 @@ export async function partitionAsync<A, B extends boolean>(
  * @example
  * withoutFirstSubstring('e', 'ego') // => 'go'
  */
-export function withoutFirstSubstring(first: string, str: string) {
+export function withoutFirstSubstring(first: string, str: string): string {
   if (!str.startsWith(first))
     throw new Error(`expected "${str}" to start with "${first}"`)
   return str.slice(first.length)
