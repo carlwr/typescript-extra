@@ -36,7 +36,7 @@ O(n)
 ```ts
 function assertNever(_: never): never
 ```
-
+Marker for exhaustiveness checks in discriminated unions.
 
 ### `cached`
 
@@ -166,14 +166,14 @@ function isSingle<T>(xs: readonly T[]): xs is [T]
 ```ts
 function mapAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<U>): Promise<U[]>
 ```
-
+Map an async function over `xs`.
 
 ### `mapFilterAsync`
 
 ```ts
 function mapFilterAsync<T, U>(xs: readonly T[], f: (x: T) => Promise<U | null | undefined>): Promise<U[]>
 ```
-
+Map an async function over `xs` and keep only defined results.
 
 ### `mapNonEmpty`
 
@@ -196,7 +196,7 @@ A rejected promise is cached as well, i.e. no re-attempts (rejections are assume
 ```ts
 function partitionAsync<A, B>(items: readonly A[], pred: (a: A) => Promise<B>): Promise<readonly [A[], A[]]>
 ```
-
+Split items into those for which the async predicate resolves truthy and falsy.
 
 ### `rm_rf`
 
