@@ -13,6 +13,13 @@ pnpm install
 
 ```
 
+### Maintenance
+
+```bash
+# bump all dependencies and verify the package still packs cleanly
+pnpm up --latest && pnpm run publish:dry
+```
+
 ### JSR
 
 ```bash
