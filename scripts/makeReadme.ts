@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile } from 'node:fs/promises'
+import { readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { Application, type TypeDocOptions } from 'typedoc'
 import type { PluginOptions } from 'typedoc-plugin-markdown'
 import { getMatch, isDefined, isEmpty, isNonEmpty, mapNonEmpty, trim } from '../src/misc.js'
 import preamble from './readmePreamble.js'
-import { rm } from 'node:fs/promises'
 
 /* hacky, temporary implementation for creating the API section of the readme:
 - use TypeDoc with the markdown plugin to generate markdown files
