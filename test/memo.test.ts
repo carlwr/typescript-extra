@@ -1,6 +1,6 @@
 import { fc, test } from '@fast-check/vitest'
 import { describe, expect } from 'vitest'
-import { cached, memoized } from '../src/misc.js'
+import { cached, cachedUnary, memoized } from '../src/misc.js'
 
 
 describe('memoized', () => {
@@ -56,6 +56,34 @@ describe('cached', () => {
     expect(() => get()).toThrow('fail')
     expect(get()).toBe('ok')
     expect(get()).toBe('ok')
+    expect(n).toBe(3)
+  })
+
+})
+
+
+describe('cachedUnary', () => {
+
+  const anyKey = fc.oneof(fc.anything(), fc.constant(NaN))
+
+  test.prop([anyKey, fc.anything()])('caches any value per key; f called once', (k, v) => {
+    let n = 0
+    const get = cachedUnary((_: unknown) => { n++; return v })
+    expect(get(k)).toBe(v)
+    expect(get(k)).toBe(v)
+    expect(n).toBe(1)
+  })
+
+  test('throw not cached — retries until success', () => {
+    let n = 0
+    const get = cachedUnary((_: string) => {
+      if (n++ < 2) throw new Error('fail')
+      return 'ok'
+    })
+    expect(() => get('a')).toThrow('fail')
+    expect(() => get('a')).toThrow('fail')
+    expect(get('a')).toBe('ok')
+    expect(get('a')).toBe('ok')
     expect(n).toBe(3)
   })
 

@@ -49,6 +49,29 @@ export function cached<T>(f: () => T): () => T {
 
 
 /**
+ * Cached, lazy evaluation of a single-argument function.
+ *
+ * The cache is keyed by argument identity (`SameValueZero`, i.e. `===` except for on `NaN`).
+ *
+ * If {@link f} throws, the result is not cached for that argument: the next call with the same argument will evaluate {@link f} again.
+ *
+ * @example
+ * const getText = cachedUnary((path: string) => readFileSync(path, 'utf8'))
+ * getText('a.txt')  // reads a.txt, returns its content
+ * getText('a.txt')  // returns cached a.txt content
+ * getText('B.txt')  // reads B.txt, returns its content
+ */
+export function cachedUnary<K,V>(f: (k: K) => V): (k: K) => V {
+  const cache = new Map<K, { v: V }>()
+  return k => {
+    let hit = cache.get(k)
+    if (!hit) cache.set(k, hit = { v: f(k) })
+    return hit.v
+  }
+}
+
+
+/**
  * whether the elements of {@link xs} are unique, in the `===` sense
  *
  * O(n)

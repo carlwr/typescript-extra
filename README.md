@@ -60,6 +60,26 @@ let c0 = getCfg()  // reads the file, returns result
 let c1 = getCfg()  // returns cached result
 ```
 
+### `cachedUnary`
+
+```ts
+function cachedUnary<K, V>(f: (k: K) => V): (k: K) => V
+```
+Cached, lazy evaluation of a single-argument function.
+
+The cache is keyed by argument identity (`SameValueZero`, i.e. `===` except for on `NaN`).
+
+If `f` throws, the result is not cached for that argument: the next call with the same argument will evaluate `f` again.
+
+example:
+
+```ts
+const getText = cachedUnary((path: string) => readFileSync(path, 'utf8'))
+getText('a.txt')  // reads a.txt, returns its content
+getText('a.txt')  // returns cached a.txt content
+getText('B.txt')  // reads B.txt, returns its content
+```
+
 ### `drain`
 
 ```ts
